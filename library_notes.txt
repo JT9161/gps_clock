@@ -1,0 +1,17 @@
+Serial: http://arduino.cc/en/Reference/SoftwareSerial
+ import library
+ Serial.begin (in loop
+ Set baud rate
+
+GPS: http://arduiniana.org/libraries/tinygps/
+ import library
+ prototype function
+ serial device
+ processing: gps.get_datetime(&date, &time, &fix_age); =>hhmmss.cc
+
+ LCD: http://playground.arduino.cc/Code/GLCDks0108
+  include library, font
+  initialize in setup()
+  write to screen
+
+
