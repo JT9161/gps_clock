@@ -3,16 +3,15 @@
 */
 
 #include <TinyGPS.h> //Parse NMEA input from GPS module
+#include <Time.h> //Time sync control
+#include <SoftwareSerial.h> //Serial input control
 #include <glcd_Buildinfo.h> //LCD control
 #include <glcd.h> //LCD control
 #include <glcd_Config.h> //LCD control
-#include <SoftwareSerial.h> //Serial input control
-#include <Time.h> //Time sync control
 
 #define RXPIN 0 //Recieve GPS module on digital pin 0
 #define TXPIN 1 //Transmit GPS module on digital pin 1
 #define GPSBAUD 9600 //GPS baud rate
-TinyGPS gps; //Initialize library
 
 int offset;
 unsigned long date_utc
@@ -20,8 +19,10 @@ unsigned long time_utc
 unsigned long date_offset
 unsigned long time_offset
 
-void setup() {
+TinyGPS gps; //Initialize library
 SoftwareSerial nss(RXPIN, TXPIN); //Initialize library and define pins
+
+void setup() {
 Serial.begin();
 nss.begin(GPSBAUD);
 }
@@ -31,7 +32,6 @@ void loop() {
 // Date/time cracking ?
 date = gps.get_datetime(&date);
 time = gps.get_datetime(&time);
-// GPS module input
 // Parse time from GPS signal
   //Set time zone: offset = direction * longitude * 24 / 360, direction = 1 for east, -1 for west, longitude is (-180,180)
 // Send to display
