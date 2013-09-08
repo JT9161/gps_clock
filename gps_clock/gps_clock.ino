@@ -39,5 +39,5 @@ time = gps.get_datetime(&time);
   //Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, longitude is (-180,180)
 
 // Send to display
-GLCD.Puts("FPS= ");
+GLCD.Puts(time);
 }
