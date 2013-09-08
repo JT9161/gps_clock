@@ -1,5 +1,5 @@
 /* GPS clock v0.1
-   Last update: 2013-06-27
+   Last update: 2013-08-05
 */
 
 #include <TinyGPS.h> //Parse NMEA input from GPS module
@@ -25,6 +25,9 @@ SoftwareSerial nss(RXPIN, TXPIN); //Initialize library and define pins
 void setup() {
 Serial.begin();
 nss.begin(GPSBAUD);
+
+GLCD.Init(NON_INVERTED); //initialize library
+GLCD.ClearScreen();
 }
 
 
@@ -33,6 +36,8 @@ void loop() {
 date = gps.get_datetime(&date);
 time = gps.get_datetime(&time);
 // Parse time from GPS signal
-  //Set time zone: offset = direction * longitude * 24 / 360, direction = 1 for east, -1 for west, longitude is (-180,180)
+  //Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, longitude is (-180,180)
+
 // Send to display
+GLCD.Puts(time);
 }
