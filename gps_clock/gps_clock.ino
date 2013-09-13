@@ -1,4 +1,4 @@
-/* GPS clock v0.1
+/* GPS clock v0.2
    Last update: 2013-08-05
 */
 
@@ -13,8 +13,8 @@
 #define TXPIN 1 //Transmit GPS module on digital pin 1
 #define GPSBAUD 9600 //GPS baud rate
 
-int offset;
-unsigned long date_utc
+signed int offset;
+unsigned long date_utc 
 unsigned long time_utc
 unsigned long date_offset
 unsigned long time_offset
@@ -28,15 +28,16 @@ nss.begin(GPSBAUD);
 
 GLCD.Init(NON_INVERTED); //initialize library
 GLCD.ClearScreen();
-}
 
+//Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, longitude is (-180,180)
+}
 
 void loop() {
 // Date/time cracking ?
-date = gps.get_datetime(&date);
-time = gps.get_datetime(&time);
+unsigned long date_utc = gps.get_datetime(&date);
+unsigned long time_utc = gps.get_datetime(&time);
 // Parse time from GPS signal
-  //Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, longitude is (-180,180)
+  
 
 // Send to display
 GLCD.Puts(time);
