@@ -14,11 +14,11 @@
 #define GPSBAUD 9600 //GPS baud rate
 
 signed int offset;
-unsigned long date_utc 
-unsigned long time_utc
-unsigned long date_offset
-unsigned long time_offset
-
+unsigned long date_utc; 
+unsigned long time_utc;
+unsigned long date_offset;
+unsigned long time_offset;
+;
 TinyGPS gps; //Initialize library
 SoftwareSerial nss(RXPIN, TXPIN); //Initialize library and define pins
 
@@ -29,15 +29,14 @@ nss.begin(GPSBAUD);
 GLCD.Init(NON_INVERTED); //initialize library
 GLCD.ClearScreen();
 
-//Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, longitude is (-180,180)
+//Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, and longitude is [-180,180]
 }
 
 void loop() {
 // Date/time cracking ?
-unsigned long date_utc = gps.get_datetime(&date);
-unsigned long time_utc = gps.get_datetime(&time);
-// Parse time from GPS signal
-  
+unsigned long date_utc = gps.get_datetime(&date_utc);
+unsigned long time_utc = gps.get_datetime(&time_utc);
+// Parse time from GPS signal 
 
 // Send to display
 GLCD.Puts(time);
