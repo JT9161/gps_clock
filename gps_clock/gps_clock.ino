@@ -1,9 +1,10 @@
-/* GPS clock v0.2
-   Last update: 2013-08-05
+/* 
+   GPS clock: https://github.com/JT9161/gps_clock
+
 */
 
 #include <TinyGPS.h> //Parse NMEA input from GPS module
-#include <Time.h> //Time sync control
+//#include <Time.h> //Time sync control
 #include <SoftwareSerial.h> //Serial input control
 #include <glcd_Buildinfo.h> //LCD control
 #include <glcd.h> //LCD control
@@ -42,5 +43,5 @@ void loop() {
 
 	// Parse time from GPS signal 
 	// Send to display
-	GLCD.Puts(utc_second);
+	GLCD.print(utc_second);
 }
