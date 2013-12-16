@@ -13,31 +13,34 @@
 #define TXPIN 1 //Transmit GPS module on digital pin 1
 #define GPSBAUD 9600 //GPS baud rate
 
-signed int offset;
-unsigned long date_utc; 
-unsigned long time_utc;
-unsigned long date_offset;
-unsigned long time_offset;
-;
+int utc_year;
+byte utc_month; 
+byte utc_day; 
+byte utc_hour; 
+byte utc_minutes; 
+byte utc_second;
+byte  utc_hundredths;
+unsigned long utc_fix_age;
+
 TinyGPS gps; //Initialize library
-SoftwareSerial nss(RXPIN, TXPIN); //Initialize library and define pins
+SoftwareSerial nss(RXPIN, TXPIN); //Initialize library and define I/O pins
 
 void setup() {
-Serial.begin();
-nss.begin(GPSBAUD);
 
-GLCD.Init(NON_INVERTED); //initialize library
-GLCD.ClearScreen();
+	//nss.begin();
+	nss.begin(GPSBAUD);
 
-//Set time zone: offset = direction * longitude * 24 / 360, where direction = 1 for east, -1 for west, and longitude is [-180,180]
+	GLCD.Init(NON_INVERTED); //initialize library
+	GLCD.ClearScreen();
+
+//Set time zone: offset = direction * longitude * (24 / 360), where direction = 1 for east, -1 for west, and longitude is [-180,180]
 }
 
 void loop() {
-// Date/time cracking ?
-unsigned long date_utc = gps.get_datetime(&date_utc);
-unsigned long time_utc = gps.get_datetime(&time_utc);
-// Parse time from GPS signal 
+	// Date/time cracking ?
+	gps.crack_datetime(&utc_year, &utc_month, &utc_day, &utc_hour, &utc_minutes, &utc_second, &utc_hundredths, &utc_fix_age);
 
-// Send to display
-GLCD.Puts(time);
+	// Parse time from GPS signal 
+	// Send to display
+	GLCD.Puts(utc_second);
 }
