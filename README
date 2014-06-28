@@ -1,11 +1,12 @@
-A GPS discipined clock built using an Arduino Uno board. Currently in its earliest form. 
+A GPS discipined clock built using an Arduino Uno board. Currently in beta. 
 
-TODO: Everything. 
+TODO: Refine NMEA setence handeling, integrate UV bulb.
 
 Initial features: 
-  *Display time in ISO8601 format
-  *Automatically determine and adjust for timezone. 
+  * Display time in ISO8601 format
+  * Automatically determine and adjust for timezone. 
 
 Future plans:
-  *Allow easy custimization of display
-  *Adjust hardware design to allow clock to be run from solar panel (hopefully). 
+  * Allow easy custimization of display
+  * Adjust hardware design to allow clock to be run from solar panel (hopefully). 
+  * Integrate with UV bulb to emulate sunlight.
